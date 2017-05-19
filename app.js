@@ -10,14 +10,25 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var passport= require('passport');
 var flash= require('connect-flash');
+var conne=require('./connections/dbconnection');
 
-mongoose.connect("mongodb://admin:test@ds141401.mlab.com:41401/testing");
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
- console.log('connection open from mongoose');
+//mongoose.connect("mongodb://admin:test@ds141401.mlab.com:41401/testing");
+//mongoose.connect("mongodb://admin:admin@ds021915.mlab.com:21915/universis");
+//var db = mongoose.connection;
+//db.on('error', console.error.bind(console, 'connection error:'));
+//db.once('open', function() {
+//console.log('connection open from mongoose');
+//});
+var dba=conne.con1.connection;
+dba.on('error', console.error.bind(console, 'connection error:'));
+dba.once('open', function() {
+console.log('connection open from mongoose1');
 });
-
+var dbb=conne.con2.connection;
+dbb.on('error', console.error.bind(console, 'connection error:'));
+dbb.once('open', function() {
+console.log('connection open from mongoose2');
+});
 require('./config/passport');
 
 var index = require('./routes/index');

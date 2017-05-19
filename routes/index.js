@@ -3,6 +3,7 @@ var router = express.Router();
 var csrf= require('csurf');
 var passport= require('passport');
 var Product= require('../models/product');
+var Account= require('../models/universis-model/accounts');
 var csrfProtection = csrf();
 router.use(csrfProtection);
 /* GET home page. */
@@ -28,7 +29,11 @@ router.get('/user/profile', function(req, res, next){
 res.render('users/profile');
 });
 router.get('/universis', function(req, res, next){
-res.render('universis');
+Account.find(function(err, docs){
+	console.log(docs);
+res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(docs));
+})
 });
 module.exports = router;
  
