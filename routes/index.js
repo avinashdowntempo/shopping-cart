@@ -3,7 +3,7 @@ var router = express.Router();
 var csrf= require('csurf');
 var passport= require('passport');
 var Product= require('../models/product');
-var Account= require('../models/universis-model/accounts');
+var Account= require('../models/universis-model/newaccounts');
 var csrfProtection = csrf();
 router.use(csrfProtection);
 /* GET home page. */

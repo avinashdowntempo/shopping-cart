@@ -9,3 +9,5 @@ clientid: {type:Number,required:true},
 accountdetails: [{Accno: {type: String, required: true},Name: {type: String, required: true},marketvalue: {type:Number,required:true}}]
 });
 module.exports= conne.con2.model('accounts',userSchema);
+
+
