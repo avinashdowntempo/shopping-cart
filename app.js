@@ -11,6 +11,7 @@ var session = require('express-session');
 var passport= require('passport');
 var flash= require('connect-flash');
 var conne=require('./connections/dbconnection');
+var ejs=require('ejs');
 
 //mongoose.connect("mongodb://admin:test@ds141401.mlab.com:41401/testing");
 //mongoose.connect("mongodb://admin:admin@ds021915.mlab.com:21915/universis");
@@ -32,13 +33,12 @@ console.log('connection open from mongoose2');
 require('./config/passport');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
 // view engine setup
-app.engine('.hbs',expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
-app.set('view engine', '.hbs');
+app.set('view engine', "ejs");
+app.engine("html", require('ejs').renderFile);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -50,7 +50,7 @@ app.use(session({secret: 'mysecretkey', resave: false, saveUninitialized: false}
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
